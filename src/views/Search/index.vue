@@ -1,6 +1,8 @@
 <!--  -->
 <template>
   <div class=''>我是搜索</div>
+  <h1>params---{{$route.params.keyword}}</h1>
+  <h1>query---{{$route.query.k}}</h1>
 </template>
 
 <script>
@@ -13,7 +15,9 @@ export default {
   components: {},
   data() {
 //这里存放数据
-    return {};
+    return {
+
+    };
   },
 //监听属性 类似于data概念
   computed: {},

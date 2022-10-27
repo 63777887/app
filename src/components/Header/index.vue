@@ -33,8 +33,8 @@
         </router-link>
       </h1>
       <div class="searchArea">
-        <form action="###" class="searchForm">
-          <input type="text" id="autocomplete" class="input-error input-xxlarge"/>
+        <form class="searchForm">
+          <input v-model="keyword" type="text" id="autocomplete" class="input-error input-xxlarge"/>
           <button class="sui-btn btn-xlarge btn-danger" type="button" @click="goSearch">搜索</button>
         </form>
       </div>
@@ -52,7 +52,9 @@ export default {
   components: {},
   data() {
 //这里存放数据
-    return {};
+    return {
+      keyword: '',
+    };
   },
 //监听属性 类似于data概念
   computed: {},
@@ -60,9 +62,15 @@ export default {
   watch: {},
 //方法集合
   methods: {
-    // 搜索按钮的毁掉函数，需要跳转到search路由
+    // 搜索按钮的回调函数，需要跳转到search路由
     goSearch(){
-      this.$router.push("/search")
+      // 路由传递参数：
+      // 1.字符串
+      // this.$router.push("/search/"+this.keyword+"?k="+this.keyword.toUpperCase())
+      // 2.模板字符串（ES6语法）
+      // this.$router.push(`/search/${this.keyword}?k=${this.keyword.toUpperCase()}`)
+      // 3.对象传参
+      this.$router.push({name:"search",params:{keyword:this.keyword},query:{k:this.keyword.toUpperCase()}})
     }
   },
 //生命周期 - 创建完成（可以访问当前this实例）

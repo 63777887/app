@@ -17,19 +17,26 @@ const routes = [
 //    配置路由
     {
         path: "/home",
-        component: Home
+        component: Home,
+        // meta: 元信息属性
+        // 设置变量show: 控制是否展示该路由组件
+        meta: {show:true}
     },
     {
-        path: "/search",
-        component: Search
+        path: "/search/:keyword",
+        component: Search,
+        meta: {show:true},
+        name: 'search'
     },
     {
         path: "/register",
-        component: Register
+        component: Register,
+        meta: {show:false}
     },
     {
         path: "/login",
-        component: Login
+        component: Login,
+        meta: {show:false}
     },
     {
         // 匹配所有路径 vue2使用*   vue3使用/:pathMatch(.*)* 或/:pathMatch(.*)或/:catchAll(.*)
