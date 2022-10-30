@@ -1,26 +1,57 @@
 <!--  -->
 <template>
-  <div class=''>我是首页</div>
+<!--  使用三级联动组件-->
+<!--  <TypeNav/>-->
+<!--  <ListContainer/>-->
+<!--  <Recommend/>-->
+<!--  <Rank/>-->
+<!--  <Like/>-->
+<!--  <Floor/>-->
+<!--  <Floor/>-->
+<!--  <Brand/>-->
+  <button @click="add">+1</button>
+  <span>仓库的数据{{count}}</span>
+  <button>-1</button>
 </template>
 
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from ‘《组件路径》‘;
+import ListContainer from "@/views/Home/ListContainer";
+import Recommend from "@/views/Home/Recommend";
+import Rank from "@/views/Home/Rank";
+import Like from "@/views/Home/Like";
+import Floor from "@/views/Home/Floor";
+import Brand from "@/views/Home/Brand";
+import {mapState } from "vuex";
 
 export default {
   name: '',
 //import引入的组件需要注入到对象中才能使用
-  components: {},
+  components: {
+    ListContainer,
+    Recommend,
+    Rank,
+    Like,
+    Floor,
+    Brand,
+  },
   data() {
 //这里存放数据
     return {};
   },
 //监听属性 类似于data概念
-  computed: {},
+  computed: {
+    ...mapState(['count'])
+  },
 //监控data中的数据变化
   watch: {},
 //方法集合
-  methods: {},
+  methods: {
+    add() {
+      this.$store.dispatch('add');
+    }
+  },
 //生命周期 - 创建完成（可以访问当前this实例）
   created() {
 

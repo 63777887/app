@@ -70,7 +70,7 @@ export default {
       // 2.模板字符串（ES6语法）
       // this.$router.push(`/search/${this.keyword}?k=${this.keyword.toUpperCase()}`)
       // 3.对象传参
-      this.$router.push({name:"search",params:{keyword:this.keyword},query:{k:this.keyword.toUpperCase()}})
+      this.$router.push({name:"search",params:{keyword:this.keyword||undefined},query:{k:this.keyword.toUpperCase()}})
     }
   },
 //生命周期 - 创建完成（可以访问当前this实例）

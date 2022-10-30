@@ -1,8 +1,8 @@
 <!--  -->
 <template>
   <div class=''>我是搜索</div>
-  <h1>params---{{$route.params.keyword}}</h1>
-  <h1>query---{{$route.query.k}}</h1>
+  <h1>params---{{$route.params.keyword}}==============={{keyword}}</h1>
+  <h1>query---{{$route.query.k}}=============={{k}}==========={{a}}</h1>
 </template>
 
 <script>
@@ -11,6 +11,7 @@
 
 export default {
   name: '',
+  props: ['keyword','a','b','k'],
 //import引入的组件需要注入到对象中才能使用
   components: {},
   data() {
