@@ -6,9 +6,6 @@ import router from "@/router";
 import store from "@/store";
 // 注册三级联动组件---全局组件
 import TypeNav from "@/components/TypeNav";
-import {getBaseCategoryList} from "@/api";
-
-getBaseCategoryList();
 
 const app = createApp(App);
 // 注册路由信息
