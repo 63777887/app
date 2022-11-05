@@ -5,7 +5,7 @@ import router from "@/router";
 // 引用仓库
 import store from "@/store";
 // 注册三级联动组件---全局组件
-import TypeNav from "@/views/Home/TypeNav";
+import TypeNav from "@/components/TypeNav";
 import {getBaseCategoryList} from "@/api";
 
 getBaseCategoryList();

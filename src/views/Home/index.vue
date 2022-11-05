@@ -1,17 +1,14 @@
 <!--  -->
 <template>
 <!--  使用三级联动组件-->
-<!--  <TypeNav/>-->
-<!--  <ListContainer/>-->
-<!--  <Recommend/>-->
-<!--  <Rank/>-->
-<!--  <Like/>-->
-<!--  <Floor/>-->
-<!--  <Floor/>-->
-<!--  <Brand/>-->
-  <button @click="add">+1</button>
-  <span>仓库的数据{{count}}</span>
-  <button>-1</button>
+  <TypeNav/>
+  <ListContainer/>
+  <Recommend/>
+  <Rank/>
+  <Like/>
+  <Floor/>
+  <Floor/>
+  <Brand/>
 </template>
 
 <script>
@@ -23,7 +20,6 @@ import Rank from "@/views/Home/Rank";
 import Like from "@/views/Home/Like";
 import Floor from "@/views/Home/Floor";
 import Brand from "@/views/Home/Brand";
-import {mapState } from "vuex";
 
 export default {
   name: '',
@@ -42,15 +38,11 @@ export default {
   },
 //监听属性 类似于data概念
   computed: {
-    ...mapState(['count'])
   },
 //监控data中的数据变化
   watch: {},
 //方法集合
   methods: {
-    add() {
-      this.$store.dispatch('add');
-    }
   },
 //生命周期 - 创建完成（可以访问当前this实例）
   created() {
