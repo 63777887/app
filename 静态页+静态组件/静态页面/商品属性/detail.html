@@ -1106,7 +1106,6 @@
                         let oChoosePrice = document.querySelector(".good-suits .master p");
                         let choosePrice = parseInt(oChoosePrice.innerHTML.substr(1));
                         oChooseAllCheckBoxs.forEach(function (item, index) {
-                            console.log(item)
                             if (item.checked) {
                                 choosePrice += parseInt(item.value)
                             }
