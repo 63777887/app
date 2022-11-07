@@ -1,8 +1,6 @@
 <!--  -->
 <template>
-  <div class=''>我是搜索</div>
-  <h1>params---{{$route.params.keyword}}==============={{keyword}}</h1>
-  <h1>query---{{$route.query.k}}=============={{k}}==========={{a}}</h1>
+  <type-nav/>
 </template>
 
 <script>

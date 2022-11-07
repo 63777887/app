@@ -3,32 +3,34 @@
   <!-- 商品分类导航 -->
   <div class="type-nav">
     <div class="container">
-      <div  @mouseleave="removeItemIndex()">
+      <div @mouseleave="removeItemIndex()" @mouseenter="showItem">
         <h2 class="all">全部商品分类</h2>
-        <div class="sort">
-          <div class="all-sort-list2"  @click="goSearch">
-            <div class="item" v-for="(c1,index) in categoryList" :key="c1.categoryId"
-                 :class="{cur:this.currentIndex==index}">
-              <h3 @mouseenter="changeItemIndex(index)">
-                <a :data-categoryName="c1.categoryName" :data-itemType="1">{{ c1.categoryName }}</a>
-              </h3>
-              <div class="item-list clearfix" v-show="currentIndex == index">
-                <div class="subitem">
-                  <dl class="fore" v-for="(c2,index) in c1.categoryChild" :key="c2.categoryId">
-                    <dt>
-                      <a :data-categoryName="c2.categoryName" :data-itemType="2">{{ c2.categoryName }}</a>
-                    </dt>
-                    <dd>
-                      <em v-for="(c3,index) in c2.categoryChild" :key="c3.categoryId">
-                        <a :data-categoryName="c3.categoryName" :data-itemType="3">{{ c3.categoryName }}</a>
-                      </em>
-                    </dd>
-                  </dl>
+        <transition name="sort">
+          <div class="sort" v-show="show">
+            <div class="all-sort-list2" @click="goSearch">
+              <div class="item" v-for="(c1,index) in categoryList" :key="c1.categoryId"
+                   :class="{cur:this.currentIndex==index}">
+                <h3 @mouseenter="changeItemIndex(index)">
+                  <a :data-categoryName="c1.categoryName" :data-itemType="1">{{ c1.categoryName }}</a>
+                </h3>
+                <div class="item-list clearfix" v-show="currentIndex == index">
+                  <div class="subitem">
+                    <dl class="fore" v-for="(c2,index) in c1.categoryChild" :key="c2.categoryId">
+                      <dt>
+                        <a :data-categoryName="c2.categoryName" :data-itemType="2">{{ c2.categoryName }}</a>
+                      </dt>
+                      <dd>
+                        <em v-for="(c3,index) in c2.categoryChild" :key="c3.categoryId">
+                          <a :data-categoryName="c3.categoryName" :data-itemType="3">{{ c3.categoryName }}</a>
+                        </em>
+                      </dd>
+                    </dl>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </transition>
       </div>
       <nav class="nav">
         <a href="###">服装城</a>
@@ -59,6 +61,7 @@ export default {
 //这里存放数据
     return {
       currentIndex: -1,
+      show: true,
     };
   },
 //监听属性 类似于data概念
@@ -79,14 +82,22 @@ export default {
     //   this.currentIndex = index
     // },
     // 添加loadsh中的节流函数
-    changeItemIndex: throttle(function (index){
+    changeItemIndex: throttle(function (index) {
       this.currentIndex = index
-    },50),
+    }, 50),
     removeItemIndex() {
-      this.currentIndex = -1
+      this.currentIndex = -1;
+      if (this.$route.path != '/home') {
+        this.show = false
+      }
+    },
+    showItem() {
+      if (this.$route.path != '/home') {
+        this.show = true
+      }
     },
     // 编程式导航进行跳转
-    goSearch(event){
+    goSearch(event) {
       // 最好的办法: 编程式导航+事件委派
       // 利用事件委派存在的问题:
       // 1.如何保证点击a标签时才跳转
@@ -97,8 +108,8 @@ export default {
       let target = event.target;
       // 获取到发出事件的节点,如何带有自定义属性,那么一定是a便签
       // dataset可以获取到自定义属性和属性值,dataset: 获取到 data-后面的名字
-      let {categoryname,itemtype} = target.dataset;
-      if (categoryname){
+      let {categoryname, itemtype} = target.dataset;
+      if (categoryname) {
         let location = {name: 'search'};
         let query = {categoryName: categoryname};
         query.itemType = itemtype
@@ -116,6 +127,10 @@ export default {
   mounted() {
     // 通知Vuex发请求，获取数据，存储与仓库中
     this.$store.dispatch('categoryList')
+    // 动态隐藏联级
+    if (this.$route.path != '/home') {
+      this.show = false
+    }
   },
   beforeCreate() {
   }, //生命周期 - 创建之前
@@ -252,6 +267,18 @@ export default {
           }
         }
       }
+    }
+
+    .sort-enter{
+      height: 0px;
+    }
+
+    .sort-enter-to{
+      height: 461px;
+    }
+
+    .sort-enter-active{
+      transition: all .5s linear;
     }
   }
 }
